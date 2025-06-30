@@ -1,0 +1,153 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donor Dashboard</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='style/donor_dashboard.css') }}">
+    
+</head>
+<body>
+
+<div class="navbar">
+    <h2>Raktra Mitra</h2>
+    <div class="nav-links">
+        <a href="#">Notifications</a>
+        <a href="/logout">Logout</a>
+    </div>
+</div>
+
+<div class="container">
+
+    <h3>Welcome, Donor!</h3>
+
+    <div class="card">
+        <h4>Profile Information</h4>
+        <p><strong>Name:</strong> {{ donor.name }}</p>
+        <p><strong>Blood Group:</strong> {{ donor.blood_group }}</p>
+        <p><strong>Location:</strong> {{ donor.location }}</p>
+        <p><strong>Last Donation Date:</strong> {{ donor.last_donation or 'N/A' }}</p>
+        <p><strong>Eligibility:</strong> <span class="eligibility {{ eligibility_class }}">{{ eligibility_status }}</span></p>
+    </div>
+
+    <div class="card">
+        <h4>Notifications</h4>
+        <ul>
+            {% for notification in notifications %}
+                <li>{{ notification.message }} - <strong>{{ notification.date }}</strong></li>
+            {% else %}
+                <li>No notifications right now.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="card">
+        <h4>Donation History</h4>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Patient Name</th>
+                <th>Location</th>
+                <th>Status</th>
+            </tr>
+            {% for history in donation_history %}
+            <tr>
+                <td>{{ history.date }}</td>
+                <td>{{ history.patient_name }}</td>
+                <td>{{ history.location }}</td>
+                <td>{{ history.status }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="4">No donations made yet.</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donor Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/donor_dashboard.css') }}">
+</head>
+<body>
+
+<!-- Sidebar toggle button for mobile -->
+<!-- <button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button> -->
+
+<div class="wrapper">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class = "navbar">
+        <h2>Raktra Mitra</h2>
+        <div class="nav-links">
+            <a href="{{ url_for('notifications_page') }}">🔔 Notifications</a>
+            <a href="{{ url_for('donation_history_page') }}">📜 Donation History</a>
+            <a href="/logout">🚪 Logout</a>
+        </div>
+        
+        </div>
+        
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="container">
+            <h3>Welcome, Donor!</h3>
+
+            <div class="card">
+                <h4>Profile Information</h4>
+                <p><strong>Name:</strong> {{ donor.name }}</p>
+                <p><strong>Blood Group:</strong> {{ donor.blood_group }}</p>
+                <p><strong>Location:</strong> {{ donor.location }}</p>
+                <p><strong>Last Donation Date:</strong> {{ donor.last_donation or 'N/A' }}</p>
+                <p><strong>Eligibility:</strong> 
+                    <span class="eligibility {{ eligibility_class }}">{{ eligibility_status }}</span>
+                </p>
+            </div>
+
+            <div class="card">
+                <h4>Notifications</h4>
+                <ul>
+                    {% for notification in notifications %}
+                        <li>{{ notification.message }} - <strong>{{ notification.date }}</strong></li>
+                    {% else %}
+                        <li>No notifications right now.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>Donation History</h4>
+                <table>
+                    <tr>
+                        <th>Date</th>
+                        <th>Patient Name</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                    </tr>
+                    {% for history in donation_history %}
+                    <tr>
+                        <td>{{ history.date }}</td>
+                        <td>{{ history.patient_name }}</td>
+                        <td>{{ history.location }}</td>
+                        <td>{{ history.status }}</td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="4">No donations made yet.</td></tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
