@@ -1,0 +1,35 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Text To Word</title></head><body><p>/* Base Settings */</p>
+<p>body {</p>
+<p>&nbsp; font-family: 'Segoe UI', sans-serif;</p>
+<p>&nbsp; scroll-behavior: smooth;</p>
+<p>}</p>
+<p>&nbsp;</p>
+<p>/* HEADER */</p>
+<p>header {</p>
+<p>&nbsp; background-color: #e53935; /* Vibrant red */</p>
+<p>&nbsp; color: white;</p>
+<p>&nbsp; transition: background-color 0.3s ease-in-out;</p>
+<p>}</p>
+<p>&nbsp;</p>
+<p>header a {</p>
+<p>&nbsp; transition: all 0.3s ease;</p>
+<p>}</p>
+<p>&nbsp;</p>
+<p>header a:hover {</p>
+<p>&nbsp; background-color: rgba(255, 255, 255, 0.15);</p>
+<p>}</p>
+<p>&nbsp;</p>
+<p>/* HOMEPAGE BUTTON (Hero Button) */</p>
+<p>.hero-button {</p>
+<p>&nbsp; background: linear-gradient(90deg, #e53935, #ff7043);</p>
+<p>&nbsp; color: white;</p>
+<p>&nbsp; font-weight: 600;</p>
+<p>&nbsp; padding: 0.75rem 2rem;</p>
+<p>&nbsp; border-radius: 0.5rem;</p>
+<p>&nbsp; transition: all 0.3s ease;</p>
+<p>&nbsp; box-shadow: 0 4px 14px rgba(229, 57, 53, 0.3);</p>
+<p>}</p>
+<p>&nbsp;</p>
+<p>.hero-button:hover {</p>
+<p>&nbsp; background: linear-gradient(90deg, #d32f2f, #f4511e);</p>
+<p>&nbsp; transform: scale(1.05);</p></body></html>
