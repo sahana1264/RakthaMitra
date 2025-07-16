@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Donor Profile</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="custom-body text-gray-800">
+
+  <div class="container-box">
+    <h1 class="title">🩸 Donor Profile</h1>
+
+    <!-- Profile Upload -->
+    <div class="upload-box" onclick="document.getElementById('imageInput').click()">
+      <img id="uploadIcon" src="https://cdn-icons-png.flaticon.com/512/921/921347.png" class="w-20 h-20 opacity-70" />
+      <img id="profileImage" class="hidden absolute top-0 left-0 w-full h-full object-cover rounded-full" />
+      <input type="file" id="imageInput" accept="image/*" class="hidden" onchange="loadImage(event)" />
+    </div>
+
+    <!-- Input Fields -->
+    <div class="space-y-4">
+      <input id="name" type="text" placeholder="Enter Name" class="input-field" />
+      <input id="mobile" type="text" placeholder="Enter Mobile No" class="input-field" />
+      <input id="email" type="email" placeholder="Enter Gmail" class="input-field" />
+      <input id="age" type="number" placeholder="Enter Age" class="input-field" />
+
+      <select id="bloodGroup" class="input-field">
+        <option value="">Select Blood Group</option>
+        <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+        <option>O+</option><option>O-</option><option>AB+</option><option>AB-</option>
+      </select>
+
+      <select id="location" class="input-field">
+        <option value="">Select Location</option>
+        <option>Bengaluru</option>
+        <option>Hyderabad</option>
+        <option>Chennai</option>
+        <option>Nellore</option>
+        <option>Tirupati</option>
+        <option>Vizag</option>
+        <option>Kakinada</option>
+        <option>Vijayawada</option>
+        <option>Guntur</option>
+      </select>
+
+      <input id="volunteerCode" type="password" placeholder="Volunteer Code (if any)" class="input-field" />
+
+      <button onclick="submitProfile()" class="submit-btn">
+        Submit
+      </button>
+    </div>
+
+    <!-- Preview -->
+    <div id="preview" class="mt-8 hidden flex flex-col items-center">
+      <div id="infoText" class="text-lg whitespace-pre-line text-left"></div>
+    </div>
+  </div>
+
+  <script>
+    let imageSrc = "";
+
+    function loadImage(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        imageSrc = reader.result;
+        const profileImg = document.getElementById("profileImage");
+        profileImg.src = imageSrc;
+        profileImg.classList.remove("hidden");
+        document.getElementById("uploadIcon").style.display = "none";
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function submitProfile() {
+      const name = document.getElementById("name").value.trim();
+      const mobile = document.getElementById("mobile").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const age = document.getElementById("age").value.trim();
+      const bloodGroup = document.getElementById("bloodGroup").value;
+      const location = document.getElementById("location").value;
+      const volunteerCode = document.getElementById("volunteerCode").value.trim();
+      const profileImg = document.getElementById("profileImage");
+
+      if (!name || !mobile || !email || !age || !bloodGroup || !location || !imageSrc) {
+        alert("Please fill all fields and upload a photo.");
+        return;
+      }
+
+      if (volunteerCode === "Team Rakthamitra") {
+        profileImg.className = "absolute top-0 left-0 w-full h-full object-cover rounded-full border-4 border-green-500";
+        document.getElementById("infoText").innerText =
+          Name: ${name}\nMobile: ${mobile}\nEmail: ${email}\nAge: ${age}\nBlood Group: ${bloodGroup}\nLocation: ${location}\nRole: Ashayam Volunteer;
+      } else {
+        profileImg.className = "absolute top-0 left-0 w-full h-full object-cover rounded-full border-4 border-red-500";
+        document.getElementById("infoText").innerText =
+          Name: ${name}\nMobile: ${mobile}\nEmail: ${email}\nAge: ${age}\nBlood Group: ${bloodGroup}\nLocation: ${location}\nRole: Regular Donor;
+      }
+
+      document.getElementById("preview").classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>
