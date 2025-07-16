@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Raktamitra - Rate Us</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+  <!-- Rating Section -->
+  <div id="ratingPage" class="bg-white p-6 rounded-xl shadow-md w-full max-w-md">
+    <h2 class="text-2xl font-bold text-red-600 text-center mb-4">Rate Raktamitra</h2>
+
+    <!-- Star Rating -->
+    <div class="flex justify-center text-3xl mb-4 gap-2" id="star-container">
+      <i class="fa-solid fa-star text-gray-300 cursor-pointer transition star-3d" data-star="1"></i>
+      <i class="fa-solid fa-star text-gray-300 cursor-pointer transition star-3d" data-star="2"></i>
+      <i class="fa-solid fa-star text-gray-300 cursor-pointer transition star-3d" data-star="3"></i>
+      <i class="fa-solid fa-star text-gray-300 cursor-pointer transition star-3d" data-star="4"></i>
+      <i class="fa-solid fa-star text-gray-300 cursor-pointer transition star-3d" data-star="5"></i>
+    </div>
+
+    <!-- Feedback Form -->
+    <form onsubmit="submitRating(event)">
+      <input type="hidden" name="rating" id="ratingInput" value="0">
+      <textarea name="feedback" id="feedbackInput" rows="4" placeholder="Write your feedback..." class="w-full p-3 border rounded-lg mb-4 focus:ring focus:ring-red-300 outline-none" required></textarea>
+      <button type="submit" class="btn-fancy w-full text-white font-semibold py-2 rounded-lg">
+        Submit Review
+      </button>
+    </form>
+  </div>
+
+  <!-- Thank You Section -->
+  <div id="thankYouPage" class="hidden bg-white p-8 rounded-xl shadow-md w-full max-w-lg text-center">
+    <h2 class="text-3xl font-bold text-green-700 mb-4">Thank You!</h2>
+    <p class="text-lg text-gray-700">Thanks for the feedback, we always hope to see you again 💖</p>
+
+    <button onclick="goBack()" class="btn-green mt-6 text-white px-6 py-2 rounded">
+      Rate Again
+    </button>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const stars = document.querySelectorAll('#star-container i');
+    const ratingInput = document.getElementById('ratingInput');
+    const ratingPage = document.getElementById('ratingPage');
+    const thankYouPage = document.getElementById('thankYouPage');
+
+    stars.forEach((star, index) => {
+      star.addEventListener('click', () => {
+        const rating = index + 1;
+        ratingInput.value = rating;
+        updateStars(rating);
+      });
+    });
+
+    function updateStars(rating) {
+      stars.forEach((star, index) => {
+        if (index < rating) {
+          star.classList.remove('text-gray-300');
+          star.classList.add('text-yellow-400');
+        } else {
+          star.classList.add('text-gray-300');
+          star.classList.remove('text-yellow-400');
+        }
+      });
+    }
+
+    function submitRating(event) {
+      event.preventDefault();
+      const rating = ratingInput.value;
+      const feedback = document.getElementById('feedbackInput').value;
+
+      if (rating === "0") {
+        alert("Please select a star rating.");
+        return;
+      }
+
+      console.log("Rating:", rating);
+      console.log("Feedback:", feedback);
+
+      ratingPage.classList.add('hidden');
+      thankYouPage.classList.remove('hidden');
+
+      event.target.reset();
+      updateStars(0);
+      ratingInput.value = 0;
+    }
+
+    function goBack() {
+      thankYouPage.classList.add('hidden');
+      ratingPage.classList.remove('hidden');
+    }
+  </script>
+
+</body>
+</html>
